@@ -16,6 +16,7 @@ function downloadImage() {
     return;
   }
 
+  // زيادة دقة الـ canvas على أساس devicePixelRatio
   const scaleFactor = window.devicePixelRatio || 1;
   canvas.width = backgroundImage.width * scaleFactor;
   canvas.height = backgroundImage.height * scaleFactor;
@@ -23,15 +24,16 @@ function downloadImage() {
 
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-  ctx.font = '22px "Noto Nastaliq Urdu", serif';
+  // إعدادات النص
+  ctx.font = '24px "Noto Nastaliq Urdu", serif';
   ctx.fillStyle = "#1f6851";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(name, canvas.width / 2, canvas.height * 0.325);
-  t;
 
+  // تحويل الصورة إلى بيانات صورة مع الحفاظ على الجودة
   const link = document.createElement("a");
   link.download = "invitation-card.png";
-  link.href = canvas.toDataURL("image/png");
+  link.href = canvas.toDataURL("image/png", 1.0); // "1.0" للحفاظ على أفضل جودة
   link.click();
 }

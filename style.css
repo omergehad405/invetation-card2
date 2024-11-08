@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.background-image {
+  width: 100%;
+  max-width: 100%;
+}
+
+.nameContainer {
+  width: 250px;
+  position: absolute;
+  top: 26.5%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  overflow: hidden;
+}
+.name-overlay {
+  font-size: 24px;
+  color: #1f6851;
+  font-family: "Noto Nastaliq Urdu", serif;
+}
+
+form {
+  margin: 2rem auto;
+  width: 450px;
+  input {
+    border: none;
+    width: 100%;
+    border: 2px solid #777;
+    text-align: right;
+    padding: 10px 15px;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    padding: 10px 3rem;
+    margin: 1rem auto;
+    width: fit-content;
+    display: block;
+    background-color: #1f6851;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}

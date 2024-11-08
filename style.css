@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 15px;
-    overflow: hidden;
+   
 
     .name-overlay {
       font-size: 24px;
@@ -67,6 +67,17 @@
 @media (max-width: 768px) {
   .container {
     width: 350px;
+
+    .nameContainer {
+      width: 80%;
+      top: 24.5%;
+      left: 15%;
+      transform: translate(-50%, -50%);
+
+      .name-overlay {
+        font-size: 18px;
+      }
+    }
 
     form {
       width: 250px;

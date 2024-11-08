@@ -26,11 +26,11 @@ function downloadImage() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
   // Add the user's name to the image with the same style as in the CSS
-  ctx.font = '24px "Noto Nastaliq Urdu", serif'; // Same font and size
+  ctx.font = '22px "Noto Nastaliq Urdu", serif'; // Same font and size
   ctx.fillStyle = "#1f6851"; // Same color
   ctx.textAlign = "center"; // Align the text in the center
   ctx.textBaseline = "middle"; // Align vertically in the center
-  ctx.fillText(name, canvas.width / 3, canvas.height * 0.325); // Position the text at 26.5% height
+  ctx.fillText(name, canvas.width / 2, canvas.height * 0.325); // Position the text at 26.5% height
 
   // Create a link to download the image
   const link = document.createElement("a");

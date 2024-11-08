@@ -67,5 +67,9 @@
 @media (max-width: 768px) {
   .container {
     width: 350px;
+
+    form {
+      width: 250px;
+    }
   }
 }

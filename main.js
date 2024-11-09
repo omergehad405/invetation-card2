@@ -1,15 +1,9 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const backgroundImage = document.getElementById("backgroundImage");
-const userNameDisplay = document.getElementById("userNameDisplay");
-
-// Update name on the design (displaying on the page while typing)
 function updateName() {
-  const name = document.getElementById("userNameInput").value;
-  userNameDisplay.innerText = name;
+  const userName = document.getElementById("userNameInput").value;
+  document.getElementById("userNameDisplay").innerText = userName;
 }
 
-// Function to download the modified image
+// لتحميل الصورة بعد التعديل
 function downloadImage() {
   const name = document.getElementById("userNameInput").value;
 
@@ -18,23 +12,43 @@ function downloadImage() {
     return;
   }
 
-  // Set canvas dimensions based on the image size
-  canvas.width = backgroundImage.width;
-  canvas.height = backgroundImage.height;
+  const backgroundImage = new Image();
+  backgroundImage.src = document.querySelector(".background-image").src;
 
-  // Draw the image on the canvas
-  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  backgroundImage.onload = function () {
+    // الحصول على الـ canvas والعناصر
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-  // Add the user's name to the image with the same style as in the CSS
-  ctx.font = '22px "Noto Nastaliq Urdu", serif'; // Same font and size
-  ctx.fillStyle = "#1f6851"; // Same color
-  ctx.textAlign = "center"; // Align the text in the center
-  ctx.textBaseline = "middle"; // Align vertically in the center
-  ctx.fillText(name, canvas.width / 2, canvas.height * 0.325); // Position the text at 26.5% height
+    // تحديد أبعاد الـ canvas بناءً على الصورة
+    canvas.width = backgroundImage.width;
+    canvas.height = backgroundImage.height;
 
-  // Create a link to download the image
-  const link = document.createElement("a");
-  link.download = "invitation-card.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
+    // رسم الصورة على الـ canvas
+    ctx.drawImage(backgroundImage, 0, 0);
+
+    // تحديد حجم الخط ديناميكيًا بناءً على عرض الصورة
+    const fontSize = Math.min(canvas.width, canvas.height) / 20; // يمكنك تعديل النسبة حسب الحجم المطلوب
+
+    // إضافة النص بحجم ديناميكي
+    ctx.font = `${fontSize}px "Noto Nastaliq Urdu", serif`;
+    ctx.fillStyle = "#1f6851";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(name, canvas.width / 2.8, canvas.height * 0.325); // تحديد موقع النص
+
+    // تصدير الصورة كـ Blob
+    canvas.toBlob(function (blob) {
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+
+      // تفعيل رابط التحميل
+      link.href = url;
+      link.download = "invitation-card.png"; // اسم الملف عند تحميله
+      link.click();
+
+      // تنظيف الرابط بعد التحميل
+      URL.revokeObjectURL(url);
+    }, "image/png");
+  };
 }
